@@ -6,9 +6,15 @@
 
 
 {% block content %}
-  <h1> Dashboard </h1>
-  <p>Welcome to your dashboard.</p>
-  
+  <h1> <img class="pic" src="{{profile.photo.url}}" alt="image"> {{request.user.username}} </h1>
+  <p>Welcome to your dashboard.
+    You can <a href="{% url 'edit' %}">edit your profile</a> or <a href="{% url 'password_change' %}">change your password</a>
+  </p>
+
+  <p>First Name:  {{request.user.first_name}} </p>
+  <p>Last Name: {{request.user.last_name}}</p>
+  <p>Email Address: {{request.user.email}}</p>
+  <p>Date of birth:  {{profile.date_of_birth}}</p>
   
 {% endblock content %}
   
