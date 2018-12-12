@@ -18,7 +18,7 @@ class Image(models.Model):
   def save(self,*args,**kwargs):
     if not self.slug:
       self.slug = slugify(self.title)
-    super(image,self).save(*args,**kwargs)
+    super(Image,self).save(*args,**kwargs)
 
   def __str__(self):
     return self.title
