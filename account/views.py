@@ -1,10 +1,25 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login
+from django.contrib.auth.models import User
 from .forms import LoginForm, UserRegistrationForm, ProfileEditForm,UserEditForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import messages
+
+
+
+
+@login_required
+def user_list(request):
+  users = User.objects.filter(is_active=True)
+  return render(request,'account/user/list.html',{'section':'people','users':users})
+
+@login_required
+def user_detail(request,username):
+  user = get_object_or_404(User,username=username,is_active=True)
+  return render(request,'account/user/detail.html',{'section':'people','user':user})
+  
 
 
 
@@ -47,7 +62,7 @@ def register(request):
       # Save the user object
       new_user.save()
       #create the user profile
-      Profile.objects.create(user=new_user, photo='users/profile.png')
+      Profile.objects.create(user=new_user, photo='users/profile.jpg')
       return render(request,'account/register_done.html',{'new_user':new_user})
   else:
     user_form = UserRegistrationForm()
