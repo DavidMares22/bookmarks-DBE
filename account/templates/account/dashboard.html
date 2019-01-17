@@ -22,7 +22,16 @@
   <p>Last Name: {{request.user.last_name}}</p>
   <p>Email Address: {{request.user.email}}</p>
   <p>Date of birth:  {{profile.date_of_birth}}</p> -->
+
+
+<h2>What's happening</h2>
+<div id="action-list">
   
+  {% for action in actions  %}
+    {% include 'actions/action/detail.html' %}
+  {% endfor %}
+    
+</div>
 {% endblock content %}
   
   
